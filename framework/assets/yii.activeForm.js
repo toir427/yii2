@@ -328,9 +328,9 @@
             $.each(data.attributes, function () {
                 this.$form = $form;
                 var $input = findInput($form, this);
-
-                if ($input.is(':disabled')) {
-                    return true;
+                var disabled = $input.toArray().reduce((result, next) => result && $(next).is(':disabled'), true);
+                if (disabled) {
+                  return true;
                 }
                 // validate markup for select input
                 if ($input.length && $input[0].tagName.toLowerCase() === 'select') {
